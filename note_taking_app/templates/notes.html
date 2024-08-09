@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Styled Notes List</title>
+</head>
+<body>
+
+    <ul id="notesList" style="list-style-type: none; padding: 0;">
+        {% for note in notes %}
+            <li style="display: flex; align-items: center; margin-bottom: 10px; padding: 10px; border: 1px solid #ddd; border-radius: 5px; background-color: #f9f9f9;">
+                <span class="note-text">{{ note }}</span>
+                <button class="edit-btn" style="margin-left: 10px; padding: 5px 10px; border: none; border-radius: 3px; cursor: pointer; font-size: 14px; background-color: #4CAF50; color: white;" 
+                        onmouseover="this.style.backgroundColor='#45a049'" 
+                        onmouseout="this.style.backgroundColor='#4CAF50'" 
+                        onclick="editNote(this)">Edit</button>
+                <button class="delete-btn" style="margin-left: 10px; padding: 5px 10px; border: none; border-radius: 3px; cursor: pointer; font-size: 14px; background-color: #f44336; color: white;" 
+                        onmouseover="this.style.backgroundColor='#e53935'" 
+                        onmouseout="this.style.backgroundColor='#f44336'"
+                        onclick="deleteNote(this)">Delete</button>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <script>
+        
+        function deleteNote(button) {
+            var li = button.parentElement;
+            li.remove();
+        }
+        function editNote(button) {
+            var li = button.parentElement;
+            var noteText = li.querySelector('.note-text');
+            var newText = prompt("Edit note:", noteText.textContent);
+
+            if (newText !== null && newText.trim() !== "") {
+                noteText.textContent = newText;
+            }
+        }
+        
+    </script>
+</body>
+</html>
+
+
